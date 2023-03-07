@@ -1,0 +1,48 @@
+{
+  "name": "acorn-access-control",
+  "version": "1.0.0-alpha",
+  "description": "A small but powerful policy-based access control library",
+  "author": "Jesse Kernaghan <hello@jessekernaghan.ca>",
+  "homepage": "https://github.com/woodland-software/acorn-access-control#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woodland-software/acorn-access-control.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "npx eslint src"
+  },
+  "bugs": {
+    "url": "https://github.com/woodland-software/acorn-access-control/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "husky": "^8.0.0",
+    "jest": "^29.4.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-config-prettier": "^8.6.0",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.5"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "**/*.{js,jsx,ts,tsx,json}": [
+      "npx prettier --write"
+    ]
+  }
+}

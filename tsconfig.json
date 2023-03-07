@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "strict": true,
+    "removeComments": true,
+    "noLib": false,
+    "target": "ESNext",
+    "outDir": "./lib"
+  },
+  "exclude": ["node_modules"]
+}
