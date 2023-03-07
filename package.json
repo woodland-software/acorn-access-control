@@ -5,23 +5,39 @@
   "author": "Jesse Kernaghan <hello@jessekernaghan.ca>",
   "homepage": "https://github.com/woodland-software/acorn-access-control#readme",
   "license": "ISC",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "./lib/cjs/index.js",
+  "types": "./lib/cjs/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
   "directories": {
     "lib": "lib",
     "test": "tests"
   },
   "files": [
-    "lib"
+    "lib/**/*"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/woodland-software/acorn-access-control.git"
   },
   "scripts": {
-    "build": "tsc",
     "test": "jest",
-    "lint": "npx eslint src"
+    "lint": "npx eslint src",
+    "clean": "rimraf ./lib",
+    "prepack": "npm run build",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
+    "build:cjs": "tsc -p ./configs/tsconfig.cjs.json"
   },
   "bugs": {
     "url": "https://github.com/woodland-software/acorn-access-control/issues"
@@ -35,6 +51,7 @@
     "jest": "^29.4.2",
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
+    "rimraf": "^4.3.1",
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.5"
   },
