@@ -1,4 +1,4 @@
-import { ResourceValidator } from './resource.validator';
+import { ResourceValidator } from '../resource.validator';
 
 describe('ResourceValidator', () => {
   const validator = new ResourceValidator();

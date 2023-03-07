@@ -1,10 +1,8 @@
-import { IamPolicyInputException, IamPolicyParseException } from '../../errors';
+import { IamPolicyInputException, IamPolicyParseException } from '../errors';
 
-export interface ITypeValidatorHandler {
-  stringValidator(input: unknown, values: unknown): boolean;
-}
-export interface ITypeValidator extends ITypeValidatorHandler {
-  findHandler(typeKey: string): ITypeValidatorHandler['stringValidator'];
+export type ValidatorHandler = (input: unknown, values: unknown[]) => boolean;
+export interface ITypeValidator {
+  findHandler(typeKey: string): ValidatorHandler;
 }
 
 export class TypeValidator implements ITypeValidator {
@@ -20,7 +18,7 @@ export class TypeValidator implements ITypeValidator {
     }
   }
 
-  stringValidator(input: unknown, values: unknown[]): boolean {
+  stringValidator: ValidatorHandler = (input, values) => {
     const isString = (input: unknown): input is string => {
       return typeof input === 'string';
     };
@@ -40,5 +38,5 @@ export class TypeValidator implements ITypeValidator {
       );
 
     return values.includes(input);
-  }
+  };
 }

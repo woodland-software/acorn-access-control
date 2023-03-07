@@ -1,4 +1,4 @@
-import { ResourceParser } from './resource.parser';
+import { ResourceParser } from '../../services/parsers/resource.parser';
 describe('ResourceParser', () => {
   const parser = new ResourceParser();
 

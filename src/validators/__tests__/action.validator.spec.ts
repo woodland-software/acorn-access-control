@@ -1,4 +1,4 @@
-import { ActionValidator } from './action.validator';
+import { ActionValidator } from '../action.validator';
 
 describe('ActionValidator', () => {
   const validator = new ActionValidator();

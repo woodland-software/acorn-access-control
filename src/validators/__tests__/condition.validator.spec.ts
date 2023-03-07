@@ -1,4 +1,4 @@
-import { ConditionValidator } from './condition.validator';
+import { ConditionValidator } from '../condition.validator';
 import { user } from '../../../tests/mocks/user.mock';
 
 describe('ConditionValidator', () => {

@@ -5,14 +5,29 @@ import {
   IamPrincipal,
 } from '../models';
 import {
+  IActionValidator,
+  IConditionValidator,
+  IPrincipalValidator,
+  IResourceValidator,
+} from '../validators';
+import {
   AccessValidatorConfig,
   IAccessValidatorConfig,
 } from './access-validator-config';
 
 export class AccessValidator {
+  private principalValidator: IPrincipalValidator;
+  private actionValidator: IActionValidator;
+  private resourceValidator: IResourceValidator;
+  private conditionValidator: IConditionValidator;
   constructor(
     readonly config: IAccessValidatorConfig = new AccessValidatorConfig(),
-  ) {}
+  ) {
+    this.principalValidator = config.principalValidator();
+    this.actionValidator = config.actionValidator();
+    this.resourceValidator = config.resourceValidator();
+    this.conditionValidator = config.conditionValidator();
+  }
 
   validate(
     policy: IamPolicy,
@@ -43,20 +58,16 @@ export class AccessValidator {
     actions: string[],
   ) {
     const localStatement = { ...statement };
-    const {
-      principalValidator,
-      actionValidator,
-      resourceValidator,
-      conditionValidator,
-      ownerCondition,
-    } = this.config;
+    const { ownerCondition } = this.config;
 
-    if (!principalValidator.inStatement(localStatement, principal))
+    if (!this.principalValidator.inStatement(localStatement, principal))
       return false;
-    if (!actionValidator.inStatement(localStatement, actions)) return false;
-    if (!resourceValidator.inStatement(localStatement, resource)) return false;
+    if (!this.actionValidator.inStatement(localStatement, actions))
+      return false;
+    if (!this.resourceValidator.inStatement(localStatement, resource))
+      return false;
 
-    if (resourceValidator.allowsCreator(localStatement, resource)) {
+    if (this.resourceValidator.allowsCreator(localStatement, resource)) {
       const existingConditions = localStatement.conditions
         ? [localStatement.conditions]
         : [];
@@ -66,7 +77,12 @@ export class AccessValidator {
       };
     }
     if (localStatement.conditions) {
-      if (!conditionValidator.matchesGroup(localStatement.conditions, resource))
+      if (
+        !this.conditionValidator.matchesGroup(
+          localStatement.conditions,
+          resource,
+        )
+      )
         return false;
     }
 

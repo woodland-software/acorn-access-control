@@ -1,5 +1,5 @@
-import { IamPolicyStatement } from '../../models';
-import { IamPolicyInputException, IamPolicyParseException } from '../../errors';
+import { IamPolicyStatement } from '../models';
+import { IamPolicyInputException, IamPolicyParseException } from '../errors';
 
 export interface IActionValidator {
   inStatement(statement: IamPolicyStatement, actionKeys: string[]): boolean;

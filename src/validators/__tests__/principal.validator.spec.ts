@@ -1,4 +1,4 @@
-import { PrincipalValidator } from './principal.validator';
+import { PrincipalValidator } from '../principal.validator';
 import { user } from '../../../tests/mocks/user.mock';
 
 describe('PrincipalValidator', () => {

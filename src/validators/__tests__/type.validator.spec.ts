@@ -1,4 +1,4 @@
-import { TypeValidator } from './type.validator';
+import { TypeValidator } from '../type.validator';
 
 describe('ResourceTypeValidator', () => {
   it('properly resolves string handler', () => {

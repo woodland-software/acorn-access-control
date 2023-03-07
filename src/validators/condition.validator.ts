@@ -1,6 +1,9 @@
-import { IamPolicyCondition, IamPolicyConditionGroup } from '../../models';
-import { IamPolicyInputException, IamPolicyParseException } from '../../errors';
-import { IResourceParser, ResourceParser } from '../resource/resource.parser';
+import { IamPolicyCondition, IamPolicyConditionGroup } from '../models';
+import { IamPolicyInputException, IamPolicyParseException } from '../errors';
+import {
+  IResourceParser,
+  ResourceParser,
+} from '../services/parsers/resource.parser';
 import { ITypeValidator, TypeValidator } from './type.validator';
 
 export interface IConditionValidator {
