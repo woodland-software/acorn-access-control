@@ -1,44 +1,44 @@
 import { PrincipalValidator } from './principal.validator';
-import { user } from '../../models/mocks/user.mock';
+import { user } from '../../../tests/mocks/user.mock';
 
 describe('PrincipalValidator', () => {
   const validator = new PrincipalValidator();
 
   it('properly matches against userId', () => {
     expect(
-      validator.includesUser(
+      validator.includesPrincipal(
         {
-          userIds: ['1234', '5678'],
+          ids: ['1234', '5678'],
         },
         user,
       ),
     ).toBeTruthy();
     expect(
-      validator.includesUser(
+      validator.includesPrincipal(
         {
-          userIds: ['5678'],
+          ids: ['5678'],
         },
         user,
       ),
     ).toBeFalsy();
   });
 
-  it('properly matches against userGroup', () => {
+  it('properly matches against user.group', () => {
     expect(
-      validator.includesUser(
+      validator.includesPrincipal(
         {
-          userIds: ['5678'],
-          userGroups: ['admin', 'accounting'],
+          ids: ['5678'],
+          groups: ['admin', 'accounting'],
         },
         user,
       ),
     ).toBeTruthy();
 
     expect(
-      validator.includesUser(
+      validator.includesPrincipal(
         {
-          userIds: ['5678'],
-          userGroups: ['accounting'],
+          ids: ['5678'],
+          groups: ['accounting'],
         },
         user,
       ),
@@ -47,7 +47,7 @@ describe('PrincipalValidator', () => {
 
   it('properly matches against pattern', () => {
     expect(
-      validator.includesUser(
+      validator.includesPrincipal(
         {
           pattern: '*',
         },
@@ -56,7 +56,7 @@ describe('PrincipalValidator', () => {
     ).toBeTruthy();
 
     expect(() =>
-      validator.includesUser(
+      validator.includesPrincipal(
         {
           pattern: 'admin-*',
         },

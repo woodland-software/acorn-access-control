@@ -1,14 +1,14 @@
-import { bloggerPolicy, adminPolicy } from './models/mocks/policy.mock';
-import { blogger, admin } from './models/mocks/user.mock';
-import { post } from './models/mocks/resource.mock';
-import { PolicyChecker } from './policy-checker';
+import { bloggerPolicy, adminPolicy } from '../../../tests/mocks/policy.mock';
+import { blogger, admin } from '../../../tests/mocks/user.mock';
+import { post } from '../../../tests/mocks/resource.mock';
+import { AccessValidator } from '../access-validator';
 
-describe('PolicyChecker', () => {
-  const policyChecker = new PolicyChecker();
+describe('AccessValidator', () => {
+  const validator = new AccessValidator();
   describe('asserts', () => {
     it('properly prevents actions that arent enabled by policy', () => {
       expect(
-        policyChecker
+        validator
           .check(bloggerPolicy)
           .resource(post)
           .allows(['User::create'])
@@ -18,7 +18,7 @@ describe('PolicyChecker', () => {
 
     it('allows actions on resources that are enabled by policy', () => {
       expect(
-        policyChecker
+        validator
           .check(adminPolicy)
           .resource(post)
           .allows(['Post::update'])
@@ -28,7 +28,7 @@ describe('PolicyChecker', () => {
 
     it('allows action on other resources based on policy', () => {
       expect(
-        policyChecker
+        validator
           .check(adminPolicy)
           .resource(blogger)
           .allows(['User::update'])
@@ -38,7 +38,7 @@ describe('PolicyChecker', () => {
 
     it('allows resource to self reference and allow update if resource targets owner', () => {
       expect(
-        policyChecker
+        validator
           .check(bloggerPolicy)
           .allows(['User::update'])
           .on(blogger)

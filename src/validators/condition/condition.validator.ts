@@ -3,31 +3,25 @@ import { IamPolicyInputException, IamPolicyParseException } from '../../errors';
 import { IResourceParser, ResourceParser } from '../resource/resource.parser';
 import { ITypeValidator, TypeValidator } from './type.validator';
 
-interface IConditionValidator<
-  Resource extends object = object,
-  Condition extends IamPolicyCondition = IamPolicyCondition,
-  Group extends IamPolicyConditionGroup = IamPolicyConditionGroup,
-> {
-  matchesGroup(conditionGroup: Group, resource: Resource): boolean;
-  matchesCondition(condition: Condition, resource: Resource): boolean;
-  hasProperty(propertyKey: string, resource: Resource): boolean;
-  isGroup(condition: object): condition is Group;
-  isCondition(condition: object): condition is Condition;
+export interface IConditionValidator {
+  matchesGroup(
+    conditionGroup: IamPolicyConditionGroup,
+    resource: object,
+  ): boolean;
+  matchesCondition(condition: IamPolicyCondition, resource: object): boolean;
+  hasProperty(propertyKey: string, resource: object): boolean;
+  isGroup(condition: object): condition is IamPolicyConditionGroup;
+  isCondition(condition: object): condition is IamPolicyCondition;
 }
 
-export class ConditionValidator<
-  Resource extends object = object,
-  Condition extends IamPolicyCondition = IamPolicyCondition,
-  Group extends IamPolicyConditionGroup = IamPolicyConditionGroup,
-> implements IConditionValidator<Resource, Condition, Group>
-{
+export class ConditionValidator implements IConditionValidator {
   constructor(
     private typeValidator: ITypeValidator = new TypeValidator(),
     private resourceParser: IResourceParser = new ResourceParser(),
   ) {}
 
-  matchesGroup<T extends Resource>(
-    conditionGroup: Group,
+  matchesGroup<T extends object>(
+    conditionGroup: IamPolicyConditionGroup,
     resource: T,
   ): boolean {
     const { children, matcher } = conditionGroup;
@@ -48,7 +42,10 @@ export class ConditionValidator<
     );
   }
 
-  matchesCondition<T extends Resource>(condition: Condition, resource: T) {
+  matchesCondition<T extends object>(
+    condition: IamPolicyCondition,
+    resource: T,
+  ) {
     const { not, resource: resourceKey, propertyKey, type, values } = condition;
     // if resource is defined, we early exit with false in order to avoid an inputException
     if (resourceKey && this.resourceParser.resolveKey(resource) !== resourceKey)
@@ -65,18 +62,18 @@ export class ConditionValidator<
     return not ? !match : match;
   }
 
-  hasProperty<T extends Resource>(
+  hasProperty<T extends object>(
     propertyKey: string,
     resource: T,
   ): propertyKey is Extract<keyof T, 'string'> {
     return resource.hasOwnProperty(propertyKey);
   }
 
-  isGroup(condition: object): condition is Group {
+  isGroup(condition: object): condition is IamPolicyConditionGroup {
     return condition.hasOwnProperty('matcher');
   }
 
-  isCondition(condition: object): condition is Condition {
+  isCondition(condition: object): condition is IamPolicyCondition {
     return condition.hasOwnProperty('propertyKey');
   }
 }

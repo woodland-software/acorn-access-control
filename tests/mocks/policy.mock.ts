@@ -1,4 +1,4 @@
-import { IamPolicy } from '../iam-policy.entity';
+import { IamPolicy } from '../../src/models/iam-policy';
 
 export const policy: IamPolicy = {
   policyId: '',
@@ -68,7 +68,7 @@ export const adminPolicy: IamPolicy = {
       statementId: '',
       policyId: '',
       effect: 'ALLOW',
-      principals: [{ userGroups: ['admin'] }],
+      principals: [{ groups: ['admin'] }],
       resources: ['Post/*', 'User/*'],
       actions: ['*::read', '*::list', '*::create', '*::update', '*::delete'],
     },

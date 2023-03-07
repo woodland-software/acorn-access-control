@@ -1,29 +1,27 @@
-import { IamPolicyPrincipal, IamPolicyStatement, IamUser } from '../../models';
+import {
+  IamPolicyPrincipal,
+  IamPolicyStatement,
+  IamPrincipal,
+} from '../../models';
 import { IamPolicyParseException } from '../../errors';
 
-export interface IPrincipalValidator<
-  User extends IamUser = IamUser,
-  Principal extends IamPolicyPrincipal = IamPolicyPrincipal,
-  Statement extends IamPolicyStatement = IamPolicyStatement,
-> {
-  inStatement(statement: Statement, user: User): boolean;
-  includesUser(principal: Principal, user: User): boolean;
+export interface IPrincipalValidator {
+  inStatement(statement: IamPolicyStatement, user: IamPrincipal): boolean;
+  includesPrincipal(principal: IamPolicyPrincipal, user: IamPrincipal): boolean;
 }
 
-export class PrincipalValidator<
-  User extends IamUser = IamUser,
-  Principal extends IamPolicyPrincipal = IamPolicyPrincipal,
-  Statement extends IamPolicyStatement<Principal> = IamPolicyStatement<Principal>,
-> implements IPrincipalValidator<User, Principal, Statement>
-{
-  inStatement(statement: Statement, user: User): boolean {
+export class PrincipalValidator implements IPrincipalValidator {
+  inStatement(statement: IamPolicyStatement, user: IamPrincipal): boolean {
     return !!statement.principals.find((principal) =>
-      this.includesUser(principal, user),
+      this.includesPrincipal(principal, user),
     );
   }
 
-  includesUser(principal: Principal, user: User): boolean {
-    const { pattern, userIds, userGroups } = principal;
+  includesPrincipal(
+    policyPrincipal: IamPolicyPrincipal,
+    principal: IamPrincipal,
+  ): boolean {
+    const { pattern, ids, groups } = policyPrincipal;
 
     if (pattern) {
       if (pattern === '*') return true;
@@ -33,14 +31,11 @@ export class PrincipalValidator<
         );
     }
 
-    if (userIds && userIds.includes(user.userId)) {
+    if (ids && ids.includes(principal.id)) {
       return true;
     }
 
-    if (
-      userGroups &&
-      !!userGroups.find((userGroup) => user.userGroups.includes(userGroup))
-    ) {
+    if (groups && !!groups.find((group) => principal.groups.includes(group))) {
       return true;
     }
 

@@ -1,29 +1,27 @@
 import { IamPolicyStatement } from '../../models';
 import { IamPolicyInputException, IamPolicyParseException } from '../../errors';
 
-export interface IActionValidator<
-  ActionKey extends string = string,
-  Statement extends IamPolicyStatement = IamPolicyStatement,
-> {
-  inStatement(statement: Statement, actionKeys: ActionKey[]): boolean;
-  includesAction(
-    statementActionKeys: ActionKey[],
-    actionKey: ActionKey,
-  ): boolean;
+export interface IActionValidator {
+  inStatement(statement: IamPolicyStatement, actionKeys: string[]): boolean;
+  includesAction(statementActionKeys: string[], actionKey: string): boolean;
 }
 
-export class ActionValidator<
-  ActionKey extends string = string,
-  Statement extends IamPolicyStatement = IamPolicyStatement,
-> implements IActionValidator<ActionKey, Statement>
+export class ActionValidator<ActionKey extends string = string>
+  implements IActionValidator
 {
-  inStatement(statement: IamPolicyStatement, actionKeys: string[]): boolean {
+  inStatement(
+    statement: IamPolicyStatement<ActionKey>,
+    actionKeys: ActionKey[],
+  ): boolean {
     return actionKeys.every((actionKey) =>
       this.includesAction(statement.actions, actionKey),
     );
   }
 
-  includesAction(statementActionKeys: string[], actionKey: string): boolean {
+  includesAction(
+    statementActionKeys: ActionKey[],
+    actionKey: ActionKey,
+  ): boolean {
     for (const statementActionKey of statementActionKeys) {
       // early exit on direct match
       if (statementActionKey === actionKey) return true;

@@ -1,5 +1,5 @@
-import { IamPolicyCondition } from './iam-policy-condition.entity';
-import { EConditionMatcher } from './iam-policy.entity';
+import { IamPolicyCondition } from './iam-policy-condition';
+import { EConditionMatcher } from './iam-policy';
 
 export interface IamPolicyConditionGroup {
   matcher: EConditionMatcher;

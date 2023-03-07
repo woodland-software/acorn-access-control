@@ -1,5 +1,5 @@
 import { ConditionValidator } from './condition.validator';
-import { user } from '../../models/mocks/user.mock';
+import { user } from '../../../tests/mocks/user.mock';
 
 describe('ConditionValidator', () => {
   const validator = new ConditionValidator();
@@ -18,7 +18,7 @@ describe('ConditionValidator', () => {
           not: false,
           propertyKey: 'createdBy',
           type: 'string',
-          values: [user.userId],
+          values: [user.id],
         },
         resource,
       ),

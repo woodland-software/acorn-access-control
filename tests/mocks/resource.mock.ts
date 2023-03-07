@@ -1,4 +1,4 @@
-import { IamResource } from '..';
+import { IamResource } from '../../src/models';
 
 export interface Post extends IamResource {
   title: string;

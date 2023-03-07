@@ -1,12 +1,12 @@
-import { IamUser, IamPolicyConditionGroup } from '../models';
+import { IamPrincipal, IamPolicyConditionGroup } from '../models';
 
 export type IsOwnerCondition<
-  User extends IamUser = IamUser,
+  User extends IamPrincipal = IamPrincipal,
   Group extends IamPolicyConditionGroup = IamPolicyConditionGroup,
 > = (user: User) => Group;
 
 export const IsOwnerCondition: IsOwnerCondition<
-  IamUser,
+  IamPrincipal,
   IamPolicyConditionGroup
 > = (user) => {
   return {
@@ -16,16 +16,16 @@ export const IsOwnerCondition: IsOwnerCondition<
         not: false,
         propertyKey: 'createdBy',
         type: 'string',
-        values: [user.userId],
+        values: [user.id],
       },
       // solves for case where we want user to be able to update
       // their own user resource
       {
         not: false,
         resource: 'User',
-        propertyKey: 'userId',
+        propertyKey: 'id',
         type: 'string',
-        values: [user.userId],
+        values: [user.id],
       },
     ],
   };
