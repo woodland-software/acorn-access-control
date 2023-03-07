@@ -51,6 +51,7 @@
     "url": "https://github.com/woodland-software/acorn-access-control/issues"
   },
   "devDependencies": {
+    "@semantic-release/github": "^8.0.7",
     "@types/jest": "^29.4.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.6.0",
