@@ -1,4 +1,4 @@
-import { IamResource } from '../../models';
+import { IamResource } from '../../models/index.js';
 
 export interface IResourceParser {
   resolveKey(resource: object): string;

@@ -1,10 +1,16 @@
-import { IamPolicyCondition, IamPolicyConditionGroup } from '../models';
-import { IamPolicyInputException, IamPolicyParseException } from '../errors';
+import {
+  IamPolicyCondition,
+  IamPolicyConditionGroup,
+} from '../models/index.js';
+import {
+  IamPolicyInputException,
+  IamPolicyParseException,
+} from '../errors/index.js';
 import {
   IResourceParser,
   ResourceParser,
-} from '../services/parsers/resource.parser';
-import { ITypeValidator, TypeValidator } from './type.validator';
+} from '../services/parsers/resource.parser.js';
+import { ITypeValidator, TypeValidator } from './type.validator.js';
 
 export interface IConditionValidator {
   matchesGroup(

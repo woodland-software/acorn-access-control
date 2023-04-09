@@ -1,5 +1,5 @@
-import { IsOwnerCondition } from '../conditions';
-import { IamPolicyConditionGroup, IamPrincipal } from '../models';
+import { IsOwnerCondition } from '../conditions/index.js';
+import { IamPolicyConditionGroup, IamPrincipal } from '../models/index.js';
 import {
   ActionValidator,
   ConditionValidator,
@@ -9,8 +9,8 @@ import {
   IResourceValidator,
   PrincipalValidator,
   ResourceValidator,
-} from '../validators';
-import { IResourceParser, ResourceParser } from './parsers';
+} from '../validators/index.js';
+import { IResourceParser, ResourceParser } from './parsers/index.js';
 
 export interface IAccessValidatorConfig {
   principalValidator: () => IPrincipalValidator;

@@ -3,17 +3,17 @@ import {
   IamPolicyStatement,
   IamResource,
   IamPrincipal,
-} from '../models';
+} from '../models/index.js';
 import {
   IActionValidator,
   IConditionValidator,
   IPrincipalValidator,
   IResourceValidator,
-} from '../validators';
+} from '../validators/index.js';
 import {
   AccessValidatorConfig,
   IAccessValidatorConfig,
-} from './access-validator-config';
+} from './access-validator-config.js';
 
 export class AccessValidator {
   private principalValidator: IPrincipalValidator;

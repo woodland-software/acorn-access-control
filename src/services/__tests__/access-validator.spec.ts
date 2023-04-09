@@ -1,7 +1,10 @@
-import { bloggerPolicy, adminPolicy } from '../../../tests/mocks/policy.mock';
-import { blogger, admin } from '../../../tests/mocks/user.mock';
-import { post } from '../../../tests/mocks/resource.mock';
-import { AccessValidator } from '../access-validator';
+import {
+  bloggerPolicy,
+  adminPolicy,
+} from '../../models/__mocks__/policy.mock.js';
+import { blogger, admin } from '../../models/__mocks__/user.mock.js';
+import { post } from '../../models/__mocks__/resource.mock.js';
+import { AccessValidator } from '../access-validator.js';
 
 describe('AccessValidator', () => {
   const validator = new AccessValidator();

@@ -1,5 +1,5 @@
-import { IamPolicyStatement, IamResource } from '../models';
-import { ResourceParser } from '../services/parsers/resource.parser';
+import { IamPolicyStatement, IamResource } from '../models/index.js';
+import { ResourceParser } from '../services/parsers/resource.parser.js';
 
 export interface IResourceValidator {
   inStatement(statement: IamPolicyStatement, resource: object): boolean;

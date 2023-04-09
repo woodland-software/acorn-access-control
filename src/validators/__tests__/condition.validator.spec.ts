@@ -1,5 +1,5 @@
-import { ConditionValidator } from '../condition.validator';
-import { user } from '../../../tests/mocks/user.mock';
+import { ConditionValidator } from '../condition.validator.js';
+import { user } from '../../models/__mocks__/user.mock.js';
 
 describe('ConditionValidator', () => {
   const validator = new ConditionValidator();
