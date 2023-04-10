@@ -1,4 +1,4 @@
-import { IamPrincipal, IamResource } from '../../src/models';
+import { IamPrincipal, IamResource } from '../index.js';
 
 export const user: IamPrincipal & IamResource = {
   name: 'User',

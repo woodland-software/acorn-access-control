@@ -2,8 +2,8 @@ name: Publish
 
 on:
   workflow_run:
-    workflows: ['Unit Tests']
-    branches: [main]
+    workflows: ['E2E Tests']
+    branches: [main, beta]
     types:
       - completed
 

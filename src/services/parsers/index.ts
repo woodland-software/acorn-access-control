@@ -1,1 +1,1 @@
-export * from './resource.parser';
+export * from './resource.parser.js';

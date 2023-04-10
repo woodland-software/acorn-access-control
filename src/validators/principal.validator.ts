@@ -2,8 +2,8 @@ import {
   IamPolicyPrincipal,
   IamPolicyStatement,
   IamPrincipal,
-} from '../models';
-import { IamPolicyParseException } from '../errors';
+} from '../models/index.js';
+import { IamPolicyParseException } from '../errors/index.js';
 
 export interface IPrincipalValidator {
   inStatement(statement: IamPolicyStatement, user: IamPrincipal): boolean;

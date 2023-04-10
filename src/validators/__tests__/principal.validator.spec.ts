@@ -1,5 +1,5 @@
-import { PrincipalValidator } from '../principal.validator';
-import { user } from '../../../tests/mocks/user.mock';
+import { PrincipalValidator } from '../principal.validator.js';
+import { user } from '../../models/__mocks__/user.mock.js';
 
 describe('PrincipalValidator', () => {
   const validator = new PrincipalValidator();

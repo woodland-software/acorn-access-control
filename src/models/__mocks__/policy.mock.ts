@@ -1,4 +1,4 @@
-import { IamPolicy } from '../../src/models/iam-policy';
+import { IamPolicy } from '../iam-policy.js';
 
 export const policy: IamPolicy = {
   policyId: '',

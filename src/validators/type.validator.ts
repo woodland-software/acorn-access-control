@@ -1,4 +1,7 @@
-import { IamPolicyInputException, IamPolicyParseException } from '../errors';
+import {
+  IamPolicyInputException,
+  IamPolicyParseException,
+} from '../errors/index.js';
 
 export type ValidatorHandler = (input: unknown, values: unknown[]) => boolean;
 export interface ITypeValidator {

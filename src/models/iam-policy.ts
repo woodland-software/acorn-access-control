@@ -1,5 +1,4 @@
-import { IamPolicyPrincipal } from './iam-policy-principal';
-import { IamPolicyStatement } from './iam-policy-statement';
+import { IamPolicyStatement } from './iam-policy-statement.js';
 
 export type EConditionEffect = 'ALLOW' | 'DENY';
 export type EConditionMatcher = 'ANY' | 'ALL';

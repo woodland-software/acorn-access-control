@@ -1,4 +1,4 @@
-import { IamPolicyException } from './iam-policy.exception';
+import { IamPolicyException } from './iam-policy.exception.js';
 
 /**
  * Thrown internally by the IamPolicy package when policy object is invalid

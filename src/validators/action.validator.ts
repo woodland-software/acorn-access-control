@@ -1,5 +1,8 @@
-import { IamPolicyStatement } from '../models';
-import { IamPolicyInputException, IamPolicyParseException } from '../errors';
+import { IamPolicyStatement } from '../models/index.js';
+import {
+  IamPolicyInputException,
+  IamPolicyParseException,
+} from '../errors/index.js';
 
 export interface IActionValidator {
   inStatement(statement: IamPolicyStatement, actionKeys: string[]): boolean;

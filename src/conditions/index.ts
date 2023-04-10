@@ -1,1 +1,1 @@
-export * from './is-owner.condition';
+export * from './is-owner.condition.js';
