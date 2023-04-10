@@ -13,7 +13,14 @@
   },
   "release": {
     "branches": [
-      "main"
+      {
+        "name": "main"
+      },
+      {
+        "name": "beta",
+        "prerelease": true,
+        "channel": "beta"
+      }
     ]
   },
   "exports": {
