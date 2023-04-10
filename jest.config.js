@@ -5,5 +5,5 @@ export default {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['lib/*'],
+  testPathIgnorePatterns: ['lib/*', 'e2e/*'],
 };
