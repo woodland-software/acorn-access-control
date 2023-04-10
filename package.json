@@ -55,6 +55,7 @@
     "clean": "rimraf ./lib",
     "prepack": "npm run build",
     "build": "npm run clean && rollup --config",
+    "release:verify": "semantic-release --dry-run",
     "semantic-release": "semantic-release"
   },
   "bugs": {

@@ -1,4 +1,4 @@
-import { IamPrincipal, IamPolicyConditionGroup } from '../models';
+import { IamPrincipal, IamPolicyConditionGroup } from '../models/index.js';
 
 export type IsOwnerCondition<
   User extends IamPrincipal = IamPrincipal,
