@@ -10,7 +10,15 @@ const config = [
         format: 'cjs',
       },
       {
+        file: 'lib/index.cjs',
+        format: 'cjs',
+      },
+      {
         file: 'lib/index.esm.js',
+        format: 'es',
+      },
+      {
+        file: 'lib/index.mjs',
         format: 'es',
       },
     ],
